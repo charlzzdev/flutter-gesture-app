@@ -4,7 +4,21 @@ import './HorizontalPixels.dart';
 
 void main() => runApp(GestureApp());
 
-class GestureApp extends StatelessWidget{
+class GestureApp extends StatefulWidget {
+      @override
+      _GestureAppState createState() => _GestureAppState();
+}
+
+class _GestureAppState extends State<GestureApp> {
+      String colorState = 'Blue-Purple';
+
+      void _setColorState(color){
+            setState(() {
+                  print('set color works ' + color);
+                  colorState = color;
+            });
+      }
+
       @override
 
       Widget build(BuildContext context){
@@ -21,8 +35,8 @@ class GestureApp extends StatelessWidget{
                                     text: TextSpan(
                                           style: customTextStyle,
                                           children: [
-                                                TextSpan(text: 'Lorem'),
-                                                TextSpan(text: 'Ipsum', style: TextStyle(fontWeight: FontWeight.w900)),
+                                                TextSpan(text: colorState.split('-')[0]),
+                                                TextSpan(text: colorState.split('-')[1], style: TextStyle(fontWeight: FontWeight.w900)),
                                           ]
                                     ),
                               ),
@@ -33,9 +47,9 @@ class GestureApp extends StatelessWidget{
                                     tooltip: 'Press to open the menu'
                               )),
                         ),
-                        drawer: SideNav(),
+                        drawer: SideNav(colorState: colorState, setColorState: _setColorState),
                         body: Center(
-                              child: GetHorizontalPixels(),
+                              child: GetHorizontalPixels(colorState: colorState),
                         ),
                   ),
             );

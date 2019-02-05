@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
 class SideNav extends StatefulWidget {
+      final String colorState;
+      final ValueChanged<void> setColorState;
+      
+      SideNav({
+            Key key,
+            this.colorState,
+            this.setColorState,
+      }) : super(key: key);
+
       @override
       _SideNavState createState() => _SideNavState();
 }
 
 class _SideNavState extends State<SideNav> {
       TextStyle drawerSubtitle = new TextStyle(fontWeight: FontWeight.w600);
-      String selectedColor = 'Blue-Purple';
 
       @override
       Widget build(BuildContext context) {
@@ -41,11 +49,11 @@ class _SideNavState extends State<SideNav> {
                                           children: [
                                                 Padding(child: Icon(Icons.color_lens), padding: EdgeInsets.only(right: 10.0),),
                                                 DropdownButton(
-                                                      value: selectedColor,
+                                                      value: widget.colorState,
                                                       items: ['Blue-Purple', 'Green-Yellow', 'Red-Orange'].map((String value) {
                                                             return new DropdownMenuItem(value: value, child: new Text(value));
                                                       }).toList(),
-                                                      onChanged: (value) => setState(() => selectedColor = value),
+                                                      onChanged: (value) => setState(() => widget.setColorState(value)),
                                                 )
                                           ]
                                     ),
